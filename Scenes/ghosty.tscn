@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3e2wj5b32ppi"]
+
+[ext_resource type="Texture2D" uid="uid://dik7x2tjnbadc" path="res://Assets/GhostieSmile.png" id="1_1vtw3"]
+[ext_resource type="Script" path="res://Scripts/ghosty.gd" id="1_s41le"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8isig"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_y4kue"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1vtw3")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ghosty" type="CharacterBody2D"]
+scale = Vector2(2, 2)
+collision_layer = 2
+collision_mask = 3
+motion_mode = 1
+platform_on_leave = 2
+platform_floor_layers = 4294967294
+script = ExtResource("1_s41le")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8isig")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_y4kue")

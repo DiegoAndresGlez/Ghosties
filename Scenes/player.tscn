@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://cydvxvc736vaa"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_6sd8m"]
+[ext_resource type="Texture2D" uid="uid://ctju2hxwdhldh" path="res://Assets/Ghostie.png" id="2_lh2sq"]
+[ext_resource type="PackedScene" uid="uid://ceumuuehgjsbf" path="res://Scenes/hitbox_component.tscn" id="3_vdyms"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7loup"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lh2sq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0pvtx"]
+size = Vector2(12.5, 18.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tpabk"]
+size = Vector2(13.3941, 17.3809)
+
+[node name="Player" type="CharacterBody2D"]
+scale = Vector2(4, 4)
+collision_mask = 0
+script = ExtResource("1_6sd8m")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_7loup")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0.5, 0.375)
+shape = SubResource("RectangleShape2D_0pvtx")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_vdyms")]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0.5, 0.374999)
+scale = Vector2(0.933247, 1.07877)
+shape = SubResource("RectangleShape2D_tpabk")
+
+[node name="FadeTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="FadeTimer" to="." method="_on_fade_timer_timeout"]

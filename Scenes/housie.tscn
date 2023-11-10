@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmx4ga170e6xf"]
+
+[ext_resource type="Script" path="res://Scripts/housie.gd" id="1_gr658"]
+[ext_resource type="Texture2D" uid="uid://l53letckhkbd" path="res://Assets/House.png" id="1_u7dvw"]
+[ext_resource type="PackedScene" uid="uid://ceumuuehgjsbf" path="res://Scenes/hitbox_component.tscn" id="3_4cxpp"]
+[ext_resource type="Script" path="res://Scenes/hitbox_component.gd" id="4_5o2q0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_01sh8"]
+atlas = ExtResource("1_u7dvw")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kp048"]
+atlas = ExtResource("1_u7dvw")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_et1n1"]
+animations = [{
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_01sh8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kp048")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rmkgh"]
+size = Vector2(56, 10.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uq2aj"]
+size = Vector2(58, 47)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+collision_layer = 4
+motion_mode = 1
+script = ExtResource("1_gr658")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_et1n1")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 17.25)
+shape = SubResource("RectangleShape2D_rmkgh")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_4cxpp")]
+script = ExtResource("4_5o2q0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(2, 0.5)
+shape = SubResource("RectangleShape2D_uq2aj")
+
+[connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
+[connection signal="area_exited" from="HitboxComponent" to="." method="_on_hitbox_component_area_exited"]
