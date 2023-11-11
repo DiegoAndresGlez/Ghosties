@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3ym5g4xx2nb4"]
+
+[ext_resource type="Texture2D" uid="uid://balg2o0xr1clj" path="res://icon.svg" id="1_0i25b"]
+[ext_resource type="Script" path="res://Scenes/projectile.gd" id="1_csw22"]
+[ext_resource type="PackedScene" uid="uid://ceumuuehgjsbf" path="res://Scenes/hitbox_component.tscn" id="2_m3axr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_e7isy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_0i25b")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0k12o"]
+
+[node name="Projectile" type="Node2D"]
+scale = Vector2(0.25, 0.25)
+script = ExtResource("1_csw22")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_e7isy")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("2_m3axr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_0k12o")
+
+[node name="DespawnTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="DespawnTimer" to="." method="_on_despawn_timer_timeout"]
