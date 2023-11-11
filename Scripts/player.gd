@@ -43,7 +43,4 @@ func fade_out(delta):
 func fade_in(delta):
 	if modulate.a <= 1:
 		modulate.a += 3 * delta
-	print(modulate.a)
-
-func _on_fade_timer_timeout():
-	pass # Replace with function body.
+	#print(modulate.a)

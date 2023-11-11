@@ -28,12 +28,12 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rmkgh"]
-size = Vector2(56, 10.5)
+size = Vector2(56, 33.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uq2aj"]
 size = Vector2(58, 47)
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
+[node name="Housie" type="CharacterBody2D"]
 collision_layer = 4
 motion_mode = 1
 script = ExtResource("1_gr658")
@@ -43,7 +43,7 @@ sprite_frames = SubResource("SpriteFrames_et1n1")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 17.25)
+position = Vector2(2, 5.75)
 shape = SubResource("RectangleShape2D_rmkgh")
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_4cxpp")]

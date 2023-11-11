@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://b3e2wj5b32ppi"]
+[gd_scene load_steps=8 format=3 uid="uid://b3e2wj5b32ppi"]
 
 [ext_resource type="Texture2D" uid="uid://dik7x2tjnbadc" path="res://Assets/GhostieSmile.png" id="1_1vtw3"]
 [ext_resource type="Script" path="res://Scripts/ghosty.gd" id="1_s41le"]
+[ext_resource type="PackedScene" uid="uid://ceumuuehgjsbf" path="res://Scenes/hitbox_component.tscn" id="3_wnywm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8isig"]
+size = Vector2(14, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_y4kue"]
 animations = [{
@@ -15,6 +17,12 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wq2p"]
+size = Vector2(14, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q3k4x"]
+size = Vector2(99.5, 77.5)
 
 [node name="Ghosty" type="CharacterBody2D"]
 scale = Vector2(2, 2)
@@ -30,3 +38,13 @@ shape = SubResource("RectangleShape2D_8isig")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_y4kue")
+
+[node name="HitboxComponent" parent="." instance=ExtResource("3_wnywm")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+shape = SubResource("RectangleShape2D_8wq2p")
+
+[node name="ShootingRange" parent="." instance=ExtResource("3_wnywm")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="ShootingRange"]
+shape = SubResource("RectangleShape2D_q3k4x")
