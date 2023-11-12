@@ -45,8 +45,6 @@ sprite_frames = SubResource("SpriteFrames_y4kue")
 shape = SubResource("RectangleShape2D_8wq2p")
 
 [node name="ShootingRange" parent="." instance=ExtResource("3_wnywm")]
-collision_layer = 2
-collision_mask = 10
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="ShootingRange"]
 shape = SubResource("RectangleShape2D_q3k4x")
@@ -55,5 +53,4 @@ shape = SubResource("RectangleShape2D_q3k4x")
 autostart = true
 
 [connection signal="area_entered" from="ShootingRange" to="." method="_on_shooting_range_area_entered"]
-[connection signal="area_exited" from="ShootingRange" to="." method="_on_shooting_range_area_exited"]
 [connection signal="timeout" from="Firerate" to="." method="_on_firerate_timeout"]

@@ -22,7 +22,9 @@ animations = [{
 scale = Vector2(0.25, 0.25)
 script = ExtResource("1_csw22")
 attack_damage = 0.1
-knockback_rng = 1.0
+knockback_force = null
+stun_time = null
+SPEED = null
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_e7isy")

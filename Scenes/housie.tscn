@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmx4ga170e6xf"]
+[gd_scene load_steps=11 format=3 uid="uid://cmx4ga170e6xf"]
 
 [ext_resource type="Script" path="res://Scripts/housie.gd" id="1_gr658"]
 [ext_resource type="Texture2D" uid="uid://l53letckhkbd" path="res://Assets/House.png" id="1_u7dvw"]
 [ext_resource type="PackedScene" uid="uid://ceumuuehgjsbf" path="res://Scenes/hitbox_component.tscn" id="3_4cxpp"]
-[ext_resource type="Script" path="res://Scenes/hitbox_component.gd" id="4_5o2q0"]
+[ext_resource type="Script" path="res://Scripts/hitbox_component.gd" id="4_doe1g"]
+[ext_resource type="Script" path="res://Scripts/health_component.gd" id="5_uwnj5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_01sh8"]
 atlas = ExtResource("1_u7dvw")
@@ -28,10 +29,10 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rmkgh"]
-size = Vector2(56, 33.5)
+size = Vector2(50, 33)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uq2aj"]
-size = Vector2(58, 47)
+size = Vector2(54, 35.5)
 
 [node name="Housie" type="CharacterBody2D"]
 collision_layer = 4
@@ -43,15 +44,21 @@ sprite_frames = SubResource("SpriteFrames_et1n1")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 5.75)
+position = Vector2(2, 5.5)
 shape = SubResource("RectangleShape2D_rmkgh")
 
-[node name="HitboxComponent" parent="." instance=ExtResource("3_4cxpp")]
-script = ExtResource("4_5o2q0")
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("3_4cxpp")]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("4_doe1g")
+health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(2, 0.5)
+position = Vector2(2, 5.25)
 shape = SubResource("RectangleShape2D_uq2aj")
+
+[node name="HealthComponent" type="Node2D" parent="."]
+script = ExtResource("5_uwnj5")
 
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
 [connection signal="area_exited" from="HitboxComponent" to="." method="_on_hitbox_component_area_exited"]

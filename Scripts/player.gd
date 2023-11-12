@@ -17,11 +17,11 @@ func _process(delta):
 		fade_out(delta)
 	else:
 		fade_in(delta)
+	change_sprite()
 	pass
 
 func _physics_process(delta):
 	get_input(delta)
-	change_sprite()
 
 func get_input(delta):
 	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
